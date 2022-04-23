@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Regex Finder</title>
+    <link rel="stylesheet" href="{% static 'regexFinder/style.css' %}" />
+  </head>
+  <body>
+    <h1>Regex Tool</h1>
+    <div class="main">
+      <div class="box">
+        <form action="{% url 'home' %}" method="POST" id="form">
+          {% csrf_token %}
+          <textarea
+            name="text"
+            id="text"
+            cols="30"
+            rows="10"
+            placeholder="Enter text here"
+          >
+{{text}}</textarea
+          >
+          <div class="input-btn">
+            <input
+              type="text"
+              name="regexExpression"
+              id="regexExpression"
+              value="{{pattern}}"
+              placeholder="Enter regex pattern here..."
+            />
+            <button type="submit">Find Patterns</button>
+          </div>
+        </form>
+      </div>
+
+      <div class="result">
+        <h3>Results</h3>
+        {% if matches %}
+        <ul>
+          {% for match in matches %}
+          <li>{{match}}</li>
+          <hr />
+          {% endfor %}
+        </ul>
+      </div>
+      {% endif %}
+    </div>
+  </body>
+</html>
